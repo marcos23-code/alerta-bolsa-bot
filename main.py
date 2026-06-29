@@ -1037,7 +1037,28 @@ def loop_selfping():
         except Exception as e:
             print(f"[SELFPING] Error: {e}")
         time.sleep(240)  # cada 4 minutos
+def enviar_briefing():
+    texto = generar_briefing()
+    try:
+        bot.send_message(CHAT_ID, texto)
+        print(f"[BRIEFING] Enviado a las {datetime.now().strftime('%H:%M')}")
+    except Exception as e:
+        print(f"[BRIEFING] Error enviando: {e}")
 
+def loop_briefing():
+    """Envía el briefing todos los días a las 09:00."""
+    HORA_BRIEFING = 9
+    ultimo_envio = None
+    while True:
+        ahora = datetime.now()
+        hoy = ahora.date()
+        
+        if ahora.hour == HORA_BRIEFING and (ultimo_envio is None or ultimo_envio != hoy):
+            enviar_briefing()
+            ultimo_envio = hoy
+            print(f"[BRIEFING] Enviado correctamente a las {ahora.strftime('%H:%M')}")
+        
+        time.sleep(30)
 if __name__ == "__main__":
     grupos_activos = [g for g, v in grupos.items() if v]
     print(f"Bot iniciado con {len(grupos_activos)} workers paralelos.")
