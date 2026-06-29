@@ -1038,9 +1038,6 @@ def loop_selfping():
             print(f"[SELFPING] Error: {e}")
         time.sleep(240)  # cada 4 minutos
 
-# ─────────────────────────────────────────────
-# ARRANQUE
-# ─────────────────────────────────────────────
 if __name__ == "__main__":
     grupos_activos = [g for g, v in grupos.items() if v]
     print(f"Bot iniciado con {len(grupos_activos)} workers paralelos.")
