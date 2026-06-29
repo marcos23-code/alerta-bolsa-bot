@@ -101,7 +101,7 @@ GRUPOS_DEFAULT = {
 
 # ─────────────────────────────────────────────
 # FRASES DE ALTO IMPACTO
-# ─────────────────────────────────────────────
+}
 PALABRAS_ALTO_IMPACTO = [
     "fda approval", "fda approves", "fda clears", "fda grants approval",
     "breakthrough therapy designation", "fast track designation",
@@ -122,7 +122,6 @@ PALABRAS_ALTO_IMPACTO = [
     "letter of intent",
 ]
     "CUSTOM": [],  # stocks añadidos por el usuario con /agregar
-}
 # RATE LIMITER GLOBAL (token bucket compartido)
 # ─────────────────────────────────────────────
 class RateLimiter:
