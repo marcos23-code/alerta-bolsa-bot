@@ -710,9 +710,7 @@ def generar_briefing():
     viernes = lunes + timedelta(days=4)
     desde = lunes.strftime("%Y-%m-%d")
     hasta = viernes.strftime("%Y-%m-%d")
-
     todos_tickers = set(t for g in grupos.values() for t in g)
-
     try:
         rate_limiter.acquire()
         url = (
@@ -732,14 +730,6 @@ def generar_briefing():
         if e.get("symbol", "").upper() in todos_tickers
     ]
 
-    # Agrupar por día
-    por_dia = {}
-    for e in coincidencias:
-        fecha = e.get("date", "?")
-        if fecha not in por_dia:
-            por_dia[fecha] = []
-        por_dia[fecha].append(e)
-
     semana_str = f"{lunes.strftime('%d/%m')} — {viernes.strftime('%d/%m/%Y')}"
     lineas = [
         f"🌅 BRIEFING SEMANAL — {hoy.strftime('%d/%m/%Y')}\n",
@@ -754,9 +744,8 @@ def generar_briefing():
         dias_es = {
             "Monday": "Lunes", "Tuesday": "Martes", "Wednesday": "Miércoles",
             "Thursday": "Jueves", "Friday": "Viernes",
-            "Saturday": "Sábado", "Sunday": "Domingo"
         }
-        for fecha in sorted(por_dia.keys()):
+        for fecha in sorted(set(e.get("date", "?") for e in coincidencias)):
             try:
                 dt = datetime.strptime(fecha, "%Y-%m-%d")
                 dia_nombre = dias_es.get(dt.strftime("%A"), dt.strftime("%A"))
@@ -764,48 +753,39 @@ def generar_briefing():
             except Exception:
                 lineas.append(f"\n📆 {fecha}:")
 
-            for e in sorted(por_dia[fecha], key=lambda x: x.get("symbol", "")):
+            for e in [x for x in coincidencias if x.get("date") == fecha]:
                 sym = e.get("symbol", "?")
                 hora = e.get("hour", "")
                 eps_est = e.get("epsEstimate")
                 rev_est = e.get("revenueEstimate")
-
                 hora_txt = {"bmo": "antes apertura", "amc": "tras cierre", "dmh": "en horario"}.get(hora, hora)
-                eps_txt = f"EPS est: ${eps_est:.2f}" if eps_est is not None else ""
-                rev_txt = f"Rev est: ${rev_est/1e6:.0f}M" if rev_est else ""
-                extra = " | ".join(filter(None, [eps_txt, rev_txt]))
-                extra_str = f" ({extra})" if extra else ""
-                lineas.append(f"  • ${sym}{extra_str} — {hora_txt}")
+                
+                # Estimación rápida de impacto
+                rango = "+5% a +20%"
+                plazo = "1-3 días"
+                if eps_est and eps_est > 0:
+                    rango = "+8% a +30%"
+                    plazo = "1-5 días"
+                
+                extra = []
+                if eps_est is not None:
+                    extra.append(f"EPS est: ${eps_est:.2f}")
+                if rev_est:
+                    extra.append(f"Rev est: ${rev_est/1e6:.0f}M")
+                extra_str = " | ".join(extra)
+                
+                lineas.append(
+                    f" • ${sym} — {hora_txt}\n"
+                    f"   📈 Potencial estimado: {rango}\n"
+                    f"   ⏱️ Plazo estimado: {plazo}\n"
+                    f"   {extra_str}"
+                )
 
     lineas.append(
         f"\n⚠️ Las alertas automáticas siguen activas 24/7.\n"
         f"Usa /buscar TICKER para escanear al instante."
     )
-
     return "\n".join(lineas)
-
-def enviar_briefing():
-    texto = generar_briefing()
-    try:
-        bot.send_message(CHAT_ID, texto)
-        print(f"[BRIEFING] Enviado a las {datetime.now().strftime('%H:%M')}")
-    except Exception as e:
-        print(f"[BRIEFING] Error enviando: {e}")
-
-def loop_briefing():
-    """Envía el briefing todos los días a las 09:00."""
-    HORA_BRIEFING = 9
-    ultimo_envio = None
-    while True:
-        ahora = datetime.now()
-        hoy = ahora.date()
-        
-        if ahora.hour == HORA_BRIEFING and (ultimo_envio is None or ultimo_envio != hoy):
-            enviar_briefing()
-            ultimo_envio = hoy
-            print(f"[BRIEFING] Enviado correctamente a las {ahora.strftime('%H:%M')}")
-        
-        time.sleep(30)  # chequeo cada 30 segundos
 
 @bot.message_handler(commands=["briefing"])
 def handle_briefing(message):
