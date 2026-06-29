@@ -95,9 +95,8 @@ GRUPOS_DEFAULT = {
         "LOMA", "VIST", "BIOX", "CAAP", "GME", "AMC", "EXPR", "PROG",
         "SPRT", "ATER", "BBIG", "OPAD", "SDC", "BBBY", "IRNT", "OPEN",
         "CLOV", "SKLZ", "HOOD", "SPCE", "WKHS", "NKLA", "HYLN", "GOEV",
-        "CHPT",
-    ],
-    # "CUSTOM": [] # stocks añadidos por el usuario con /agregar
+        "CHPT",],
+       "CUSTOM": [] # stocks añadidos por el usuario con /agregar
 
 # ─────────────────────────────────────────────
 # FRASES DE ALTO IMPACTO
@@ -120,8 +119,7 @@ PALABRAS_ALTO_IMPACTO = [
     "acquisition agreement", "merger agreement", "buyout offer",
     "takeover bid", "going private", "strategic alternatives",
     "letter of intent",
-]
-    "CUSTOM": [],  # stocks añadidos por el usuario con /agregar
+]  "CUSTOM": [],  # stocks añadidos por el usuario con /agregar
 # RATE LIMITER GLOBAL (token bucket compartido)
 # ─────────────────────────────────────────────
 class RateLimiter:
