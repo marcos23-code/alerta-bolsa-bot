@@ -121,8 +121,8 @@ PALABRAS_ALTO_IMPACTO = [
     "takeover bid", "going private", "strategic alternatives",
     "letter of intent",
 ]
-
-# ─────────────────────────────────────────────
+    "CUSTOM": [],  # stocks añadidos por el usuario con /agregar
+}
 # RATE LIMITER GLOBAL (token bucket compartido)
 # ─────────────────────────────────────────────
 class RateLimiter:
