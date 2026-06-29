@@ -16,9 +16,8 @@ FINNHUB_API_KEY = os.environ["FINNHUB_API_KEY"]
 ARCHIVO_GRUPOS    = "grupos.json"
 ARCHIVO_HISTORIAL = "historial.json"
 MAX_HISTORIAL     = 500       # máximo de entradas guardadas
-PAUSA_ENTRE_CICLOS = 20       # segundos de descanso entre ciclos por grupo
-MAX_CALLS_POR_MINUTO = 55     # margen bajo el límite de 60 de Finnhub
-
+MAX_CALLS_POR_MINUTO = 58   # máximo seguro con Finnhub gratis
+PAUSA_ENTRE_CICLOS = 12     # más rápido
 # ─────────────────────────────────────────────
 # GRUPOS DE EMPRESAS
 # Cada worker escanea su grupo de forma independiente.
@@ -1062,7 +1061,7 @@ def loop_briefing():
 if __name__ == "__main__":
     grupos_activos = [g for g, v in grupos.items() if v]
     print(f"Bot iniciado con {len(grupos_activos)} workers paralelos.")
-    print(f"Total empresas: {total_empresas()}")
+    print(f"Total empresas: {total_empresas()} (ampliado)")
     print(f"Rate limiter: {MAX_CALLS_POR_MINUTO} calls/min compartidos entre workers.")
 
     for nombre_grupo in grupos_activos:
