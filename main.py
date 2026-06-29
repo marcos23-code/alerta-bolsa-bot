@@ -795,12 +795,16 @@ def enviar_briefing():
 def loop_briefing():
     """Envía el briefing todos los días a las 09:00."""
     HORA_BRIEFING = 9
-    enviado_hoy = None
+    ultimo_envio = None
     while True:
         ahora = datetime.now()
-        if ahora.hour == HORA_BRIEFING and ahora.date() != enviado_hoy:
+        hoy = ahora.date()
+        
+        if ahora.hour == HORA_BRIEFING and (ultimo_envio is None or ultimo_envio != hoy):
             enviar_briefing()
-            enviado_hoy = ahora.date()
+            ultimo_envio = hoy
+            print(f"[BRIEFING] Enviado correctamente a las {ahora.strftime('%H:%M')}")
+        
         time.sleep(30)  # chequeo cada 30 segundos
 
 @bot.message_handler(commands=["briefing"])
