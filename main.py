@@ -1048,7 +1048,7 @@ if __name__ == "__main__":
         t = threading.Thread(target=worker_grupo, args=(nombre_grupo,), daemon=True)
         t.start()
 
-    t_briefing = threading.Thread(target=loop_briefing, daemon=True)
+        t_briefing = threading.Thread(target=loop_briefing, daemon=True)
     t_briefing.start()
     print("Briefing automático programado a las 09:00 cada día.")
 
