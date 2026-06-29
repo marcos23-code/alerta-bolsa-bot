@@ -25,7 +25,7 @@ PAUSA_ENTRE_CICLOS = 12     # más rápido
 # ─────────────────────────────────────────────
 GRUPOS_DEFAULT = {
     "BIOTECH_FDA": [
-        # Biotech / Pharma clínica — catalizadores FDA y ensayos
+        # Ampliada con más empresas de alto catalizador (FDA, Fase 2/3, etc.)
         "ACRX", "ADMA", "ADTX", "AGRX", "ALDX", "ALVR", "AMPIO", "ANAB",
         "APDN", "ARDX", "ARQT", "ATXI", "AVDL", "AVXL", "AXSM", "BCRX",
         "BLUE", "BNGO", "BPMC", "BTAI", "CADX", "CBAY", "CERS", "CHMA",
@@ -50,10 +50,20 @@ GRUPOS_DEFAULT = {
         "ITOS", "LIFE", "QNRX", "NRXP", "VTGN", "PRQR", "CLYM", "GUTS",
         "OSTX", "LRMR", "SNGX", "BDRX", "TTOO", "LGVN", "KTRA", "UNCY",
         "OTLK", "SLS", "IOBT", "TLSA", "CABA", "CDTX", "CGEM", "CNCE",
-        "PEGY", "HLTH", "HOOK", "HGEN", "ANIP", "ICCM", "LHCG",
+        "PEGY", "HLTH", "HOOK", "HGEN", "ANIP", "ICCM", "LHCG", "MRTX",
+        "VSTM", "CRBP", "SPPI", "ATOS", "CLRB", "LCTX", "ONTX", "SAVA",
+        "SNDX", "KOD", "TGTX", "MGNX", "ADCT", "MGTA", "RIGL", "SCPH",
+        "VRCA", "ARDS", "CLSD", "LPTX", "MBRX", "NERV", "OVID", "PDSB",
+        "RVPH", "SGBX", "SONN", "TFFP", "VIRI", "WINT", "XCUR", "ACHV",
+        "CLGN", "GNLX", "LGVN", "SNGX", "TNXP", "VRAX", "BDRX", "ATNF",
+        "BRTX", "CLNN", "DRMA", "ENOB", "FOXO", "GCTK", "HSDT", "LUCY",
+        "MYNZ", "NUWE", "ONCR", "PHIO", "PTIX", "QLI", "RSLS", "SINT",
+        "SONN", "STSS", "SXTP", "TIVC", "VAPO", "WINT", "XLO", "ATOS",
+        "SAVA", "VSTM", "CRBP", "SPPI", "CLRB", "LCTX", "ONTX", "SNDX",
+        "KOD", "TGTX", "MGNX", "ADCT", "MGTA", "RIGL", "SCPH", "VRCA",
+        "ARDS", "CLSD", "LPTX", "MBRX", "NERV", "OVID", "PDSB", "RVPH",
     ],
     "TECH_GROWTH": [
-        # Tech / Software / AI / Semiconductores pequeños
         "ACMR", "APPS", "ASTS", "BBAI", "BFLY", "BIGC", "BLZE", "BRZE",
         "CFLT", "CLBT", "CODA", "CRCT", "CWAN", "DNMR", "DUOL", "ENVX",
         "ESTC", "FROG", "GETY", "GTLB", "HOLO", "IONQ", "IRBT", "JOBY",
@@ -66,39 +76,28 @@ GRUPOS_DEFAULT = {
         "GKOS", "SILK", "SWAV", "TELA", "AXNX", "NSTG", "CTSO", "LIVN",
         "PSTV", "CEMI", "BHVN", "DAVE", "OPEN", "LMND", "SOFI", "AFRM",
         "HOOD", "CLOV", "ACHR", "VSCO", "BKKT", "TPST", "PRCT", "AIOT",
+        "SOUN", "RGTI", "QBTS", "AISP", "PEGY", "LAZR", "QS", "VLN",
+        "MVIS", "LUNR", "SERV", "BBAI", "RKLB", "SPCE", "JOBY", "ASTS",
     ],
     "EV_SPACE_CRYPTO": [
-        # Vehículos eléctricos / Energía limpia
         "CHPT", "BLNK", "GOEV", "SOLO", "AYRO", "IDEX", "FSR", "MULN",
         "LCID", "RIVN", "FFIE", "REE", "HYZN", "FREY", "ZEV", "EVGO",
-        "PTRA", "NKLA", "WKHS", "HYLN", "ARVL", "HYZN",
-        # Espacio / Defensa
-        "ASTR", "MNTS", "IRDM", "KTOS", "AVAV", "MRCY", "MAXN",
-        # Cripto-relacionadas
-        "MSTR", "MARA", "RIOT", "HUT", "BTBT", "CLSK", "COIN", "CAN",
-        "BTDR", "CIFR", "WULF", "IREN", "CORZ",
-        # Semiconductores cripto / AI chips
-        "SMCI", "NVDA", "AMD", "INTC", "MRVL", "QCOM",
+        "PTRA", "NKLA", "WKHS", "HYLN", "ARVL", "HYZN", "ASTR", "MNTS",
+        "IRDM", "KTOS", "AVAV", "MRCY", "MAXN", "MSTR", "MARA", "RIOT",
+        "HUT", "BTBT", "CLSK", "COIN", "CAN", "BTDR", "CIFR", "WULF",
+        "IREN", "CORZ", "SMCI", "NVDA", "AMD", "INTC", "MRVL", "QCOM",
     ],
     "FINTECH_MEME_INTL": [
-        # Fintech / Servicios financieros
         "MQ", "STEP", "RMBS", "TPVG", "PFLT", "GLAD", "HTGC", "GAIN",
-        "CURO", "TREE", "GCMG", "PSFE",
-        # Cannabis
-        "CGC", "ACB", "CRON", "SNDL", "OGI", "TLRY", "FLGC",
-        # China / Asia (listadas en USA)
-        "NIO", "XPEV", "LI", "BIDU", "JD", "GRAB", "SE", "FUTU",
-        "MELI", "GLOB", "VTEX", "STNE", "PAGS", "ARCO", "LOMA", "VIST",
-        "BIOX", "CAAP",
-        # Meme / alta volatilidad
-        "GME", "AMC", "EXPR", "PROG", "SPRT", "ATER", "BBIG",
-        "OPAD", "SDC", "BBBY", "IRNT",
-        # Otros growth populares en Trade Republic
-        "OPEN", "CLOV", "SKLZ", "HOOD", "SPCE", "WKHS", "NKLA",
-        "HYLN", "GOEV", "CHPT",
+        "CURO", "TREE", "GCMG", "PSFE", "CGC", "ACB", "CRON", "SNDL",
+        "OGI", "TLRY", "FLGC", "NIO", "XPEV", "LI", "BIDU", "JD", "GRAB",
+        "SE", "FUTU", "MELI", "GLOB", "VTEX", "STNE", "PAGS", "ARCO",
+        "LOMA", "VIST", "BIOX", "CAAP", "GME", "AMC", "EXPR", "PROG",
+        "SPRT", "ATER", "BBIG", "OPAD", "SDC", "BBBY", "IRNT", "OPEN",
+        "CLOV", "SKLZ", "HOOD", "SPCE", "WKHS", "NKLA", "HYLN", "GOEV",
+        "CHPT",
     ],
-    "CUSTOM": [],  # stocks añadidos por el usuario con /agregar
-}
+    # "CUSTOM": [] # stocks añadidos por el usuario con /agregar
 
 # ─────────────────────────────────────────────
 # FRASES DE ALTO IMPACTO
